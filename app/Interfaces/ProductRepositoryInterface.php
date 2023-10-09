@@ -22,10 +22,11 @@ interface ProductRepositoryInterface
     public function getByID(int $id, $queryParameter);
 
     /**
+     * @param int $id
      * @param $alias
      * @return mixed
      */
-    public function checkProductExists($alias);
+    public function checkProductExists(int $id, $alias);
 
     /**
      * @param ProductStoreRequest $request
@@ -45,7 +46,7 @@ interface ProductRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function destroyUser(int $id);
+    public function destroyProduct(int $id);
 
 
 }
