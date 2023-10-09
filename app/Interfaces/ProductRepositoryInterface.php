@@ -22,10 +22,10 @@ interface ProductRepositoryInterface
     public function getByID(int $id, $queryParameter);
 
     /**
-     * @param $username
+     * @param $alias
      * @return mixed
      */
-    public function checkProductExists($username);
+    public function checkProductExists($alias);
 
     /**
      * @param ProductStoreRequest $request
