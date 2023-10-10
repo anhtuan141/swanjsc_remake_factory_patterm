@@ -2,8 +2,8 @@
 
 namespace App\DataTransferObjects;
 
-use App\Http\Requests\Api\User\ProfileRequest;
-use App\Http\Requests\Api\User\UserRequest;
+use App\Http\Requests\Api\User\UserProfileRequest;
+use App\Http\Requests\Api\User\UserStoreRequest;
 use App\Http\Requests\Api\User\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +33,7 @@ class UserDto
         $this->status = $status;
     }
 
-    public static function storeRequest(UserRequest $request)
+    public static function storeRequest(UserStoreRequest $request)
     {
         return new self(
             $request->name,
@@ -61,7 +61,7 @@ class UserDto
         );
     }
 
-    public static function profileRequest(ProfileRequest $request, User $user)
+    public static function profileRequest(UserProfileRequest $request, User $user)
     {
         return new self(
             $request->name ?: $user->name,

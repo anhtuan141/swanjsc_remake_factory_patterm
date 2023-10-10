@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\DataTransferObjects\UserDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\ChangePassRequest;
-use App\Http\Requests\Api\User\ProfileRequest;
+use App\Http\Requests\Api\User\UserProfileRequest;
 use App\Http\Requests\Api\User\UserLoginRequest;
-use App\Http\Requests\Api\User\UserRequest;
+use App\Http\Requests\Api\User\UserStoreRequest;
 use App\Http\Requests\Api\User\UserUpdateRequest;
 use App\Messages\User\UserNotification;
 use App\Models\User;
@@ -61,7 +61,7 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UserRequest $request)
+    public function store(UserStoreRequest $request)
     {
         //Check Validate Data
         $validated = $request->validated();
@@ -267,7 +267,7 @@ class UserController extends Controller
 
     }
 
-    public function profileUpdate(ProfileRequest $request)
+    public function profileUpdate(UserProfileRequest $request)
     {
         //Check Validate Data
         $validate = $request->validated();
