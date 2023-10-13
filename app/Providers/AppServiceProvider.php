@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Factories\ConcreteSupplierRepositoryFactory;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\ProductRepositoryInterface;
+use App\Interfaces\SupplierRepositoryFactoryInterface;
 use App\Interfaces\SupplierRepositoryInterface;
 use App\Interfaces\UserGroupRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
@@ -35,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SupplierRepositoryInterface::class, SupplierRepository::class);
 
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+
+        $this->app->bind(SupplierRepositoryFactoryInterface::class, ConcreteSupplierRepositoryFactory::class);
     }
 
     /**
