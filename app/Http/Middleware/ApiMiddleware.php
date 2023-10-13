@@ -17,7 +17,7 @@ class ApiMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->header('api-key') == 'vykiet') {
+        if ($request->header('api-key') != 'vykiet') {
             return response()->json([
                 'message' => 'Access deny!'
             ], Response::HTTP_FORBIDDEN);
