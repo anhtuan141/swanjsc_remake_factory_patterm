@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,8 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::group(['middleware' => 'auth.api'], function () {
 
+    Route::apiResource('supplierapi', SupplierController::class);
+
+});
