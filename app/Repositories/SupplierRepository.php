@@ -26,7 +26,7 @@ class SupplierRepository implements SupplierRepositoryInterface
      * @param $queryParameter
      * @return void
      */
-    public function getListSupplier($queryParameter)
+    public function getSupplierList($queryParameter)
     {
         if (!$queryParameter) {
             $queryParameter = Supplier::query();

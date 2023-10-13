@@ -28,7 +28,7 @@ class ConcreteSupplierRepositoryFactory implements SupplierRepositoryFactoryInte
     public function getListSupplierRepository()
     {
         $queryParameters = ['name' => 'Tuan'];
-        $supplierList = $this->supplierRepository->getListSupplier($queryParameters);
+        $supplierList = $this->supplierRepository->getSupplierList($queryParameters);
         $supplierListResource = SupplierResource::collection($supplierList);
 
         return $supplierListResource;

@@ -12,7 +12,7 @@ interface SupplierRepositoryInterface
      * @param $queryParameter
      * @return mixed
      */
-    public function getListSupplier($queryParameter);
+    public function getSupplierList($queryParameter);
 
     /**
      * @param int $id
