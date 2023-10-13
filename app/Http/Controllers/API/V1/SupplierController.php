@@ -4,22 +4,32 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\SupplierRepositoryFactoryInterface;
+use App\Service\SupplierService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SupplierController extends Controller
-{
-    /**
-     * @var SupplierRepositoryFactoryInterface
-     */
+{ /**
+ * @var SupplierRepositoryFactoryInterface
+ */
     private $supplierRepositoryFactory;
 
     /**
-     * @param SupplierRepositoryFactoryInterface $supplierRepositoryFactory
+     * @var SupplierService
      */
-    public function __construct(SupplierRepositoryFactoryInterface $supplierRepositoryFactory)
+    private SupplierService $supplierService;
+
+    /**
+     * @param SupplierRepositoryFactoryInterface $supplierRepositoryFactory
+     * @param SupplierService $supplierService
+     */
+    public function __construct(
+        SupplierRepositoryFactoryInterface $supplierRepositoryFactory,
+        SupplierService                    $supplierService
+    )
     {
         $this->supplierRepositoryFactory = $supplierRepositoryFactory;
+        $this->supplierService = $supplierService;
     }
 
     /**
@@ -29,8 +39,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $queryParameter = ['name' => 'n/a'];
-        $supplierList = $this->supplierRepositoryFactory->getListSupplierRepository($queryParameter);
+        $queryParameter = [];
+        $supplierList = $this->supplierService->getSupplierList($queryParameter);
 
         return response()->json([
             'data' => $supplierList
@@ -40,7 +50,7 @@ class SupplierController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +61,7 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,8 +72,8 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,7 +84,7 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
