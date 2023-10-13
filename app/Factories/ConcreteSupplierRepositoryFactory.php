@@ -23,14 +23,11 @@ class ConcreteSupplierRepositoryFactory implements SupplierRepositoryFactoryInte
     }
 
     /**
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @param $queryParameter
+     * @return mixed
      */
-    public function getListSupplierRepository()
+    public function getListSupplierRepository($queryParameter)
     {
-        $queryParameters = ['name' => 'Tuan'];
-        $supplierList = $this->supplierRepository->getSupplierList($queryParameters);
-        $supplierListResource = SupplierResource::collection($supplierList);
-
-        return $supplierListResource;
+        return $this->supplierRepository->getSupplierList($queryParameter);
     }
 }

@@ -29,7 +29,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $supplierList = $this->supplierRepositoryFactory->getListSupplierRepository();
+        $queryParameter = ['name' => 'n/a'];
+        $supplierList = $this->supplierRepositoryFactory->getListSupplierRepository($queryParameter);
 
         return response()->json([
             'data' => $supplierList

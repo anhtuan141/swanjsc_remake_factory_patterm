@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Enums\Paginate;
 use App\Http\Requests\Api\Supplier\SupplierStoreRequest;
 use App\Http\Requests\Api\Supplier\SupplierUpdateRequest;
 use App\Interfaces\SupplierRepositoryInterface;
@@ -24,26 +25,21 @@ class SupplierRepository implements SupplierRepositoryInterface
 
     /**
      * @param $queryParameter
-     * @return void
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|mixed
      */
     public function getSupplierList($queryParameter)
     {
-        if (!$queryParameter) {
-            $queryParameter = Supplier::query();
-        }
+        $query = $this->supplier->query();
 
         $searchableFields = ['name', 'alias', 'status', 'created_at', 'updated_at'];
 
         foreach ($queryParameter as $key => $value) {
             if (in_array($key, $searchableFields)) {
-                $queryParameter->where($key, 'like', '%' . $value . '%');
+                $query->where($key, 'like', '%' . $value . '%');
             }
         }
 
-        $number = $queryParameter->input('number', 20);
-        $number = min($number, 100);
-
-        return $queryParameter->paginate($number);
+        return $query->paginate(Paginate::Paginate);
     }
 
     /**

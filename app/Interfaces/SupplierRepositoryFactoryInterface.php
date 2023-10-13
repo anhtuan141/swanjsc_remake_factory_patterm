@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface SupplierRepositoryFactoryInterface
 {
-    public function getListSupplierRepository();
+    public function getListSupplierRepository($queryParameter);
 }
