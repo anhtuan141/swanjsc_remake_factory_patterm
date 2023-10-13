@@ -28,36 +28,22 @@ class SupplierRepository implements SupplierRepositoryInterface
      */
     public function getListSupplier($queryParameter)
     {
-        $query = $queryParameter;
+        if (!$queryParameter) {
+            $queryParameter = Supplier::query();
+        }
+
+        $searchableFields = ['name', 'alias', 'status', 'created_at', 'updated_at'];
 
         foreach ($queryParameter as $key => $value) {
-            switch ($key) {
-                case 'name':
-                    $query->where('name', 'like', '%' . $value . '%');
-                    break;
-
-                case 'alias':
-                    $query->where('alias', 'like', '%' . $value . '%');
-                    break;
-
-                case 'status':
-                    $query->where('status', 'like', '%' . $value . '%');
-                    break;
-
-                case 'created_at':
-                    $query->where('created_at', 'like', '%' . $value . '%');
-                    break;
-
-                case 'updated_at':
-                    $query->where('updated_at', 'like', '%' . $value . '%');
-                    break;
+            if (in_array($key, $searchableFields)) {
+                $queryParameter->where($key, 'like', '%' . $value . '%');
             }
         }
 
-        $number = $queryParameters['number'] ?? 20;
+        $number = $queryParameter->input('number', 20);
         $number = min($number, 100);
 
-        return $query->paginate($number);
+        return $queryParameter->paginate($number);
     }
 
     /**
